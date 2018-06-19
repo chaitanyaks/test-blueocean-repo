@@ -7,13 +7,26 @@ pipeline {
   }
   stages {
     stage('build') {
-      steps {
-        sh 'hostname'
+      parallel {
+        stage('build') {
+          steps {
+            sh 'hostname'
+          }
+        }
+        stage('scm') {
+          steps {
+            git(url: 'https://chaitanyaks@bitbucket.org/chaitanyaks/terraform_repo.git', branch: 'test', credentialsId: 'bit_creds_chaitu')
+          }
+        }
       }
     }
     stage('test') {
       steps {
-        sh 'pwd && ls'
+        sh '''cd /home/jenkins
+terraform init
+terraform plan
+
+'''
       }
     }
   }
