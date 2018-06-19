@@ -11,5 +11,10 @@ pipeline {
         sh 'hostname'
       }
     }
+    stage('test') {
+      steps {
+        sh 'pwd && ls'
+      }
+    }
   }
 }
