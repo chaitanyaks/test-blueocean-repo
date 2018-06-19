@@ -22,8 +22,7 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh '''cd /home/jenkins
-pwd && ls
+        sh '''pwd && ls
 terraform init
 terraform plan
 
